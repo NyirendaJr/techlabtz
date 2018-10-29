@@ -1,21 +1,47 @@
-{% extends 'blog/base.html' %}
+{% extends "blog/base.html" %}
+{% load staticfiles %}
 {% block content %}
-    {% if user.is_authenticated %}
-        <a class="btn btn-success" href="{% url 'post_new' %}"><span class="glyphicon glyphicon-plus"></span>Add new blog</a>
-    {% endif %}
-    <hr>
+<div class="col-md-9" style="background-color: #fff;">
+  {% if posts.count > 0 %}
     {% for post in posts %}
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">{{ post.author }}</h3>
-                <br>
-                <p class="panel-title">{{ post.published_date }}</p>
+    <div class="row">
+        <div class="col-md-12 post">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>
+                        <strong>
+                          <a href="" class="post-title">{{ post.title }}</a>
+                        </strong>
+                      </h4>
+                </div>
             </div>
-            <div class="panel-body">
-                <h4 class="panel-title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h4>
-                <p>{{ post.text|linebreaksbr }}</p>
-                <a href="{% url 'post_detail' pk=post.pk %}">{{ post.approved_comments.count }} Comments</a>
+            <div class="row">
+                <div class="col-md-12 post-header-line">
+                    <span class="glyphicon glyphicon-user"></span>by <a href="#">{{ post.author }}</a> | <span class="glyphicon glyphicon-calendar">
+                    </span>{{ post.published_date }} | <span class="glyphicon glyphicon-comment"></span><a href="#">
+                        {{ post.comments.count }} Comments</a> | <i class="icon-share"></i><a href="#">39 Shares</a> | <span class="glyphicon glyphicon-tags">
+                        </span>Tags : <a href="#"><span class="label label-info">Snipp</span></a> <a href="#">
+                            <span class="label label-info">Bootstrap</span></a> <a href="#"><span class="label label-info">
+                                UI</span></a> <a href="#"><span class="label label-info">growth</span></a>
+                </div>
+            </div>
+            <div class="row post-content">
+                <div class="col-md-3">
+                    <a href="#">
+                        <img src="{% static 'images/1.png' %}" alt="" class="img-responsive">
+                    </a>
+                </div>
+                <div class="col-md-9">
+                    <p>{{ post.text|lower|truncatewords:'35' }}</p>
+                    <p>
+                      <a class="btn btn-read-more" href="{% url 'blog:post_detail' pk=post.pk %}">Read more</a>
+                    </p>
+                </div>
             </div>
         </div>
+    </div>
     {% endfor %}
+    {% else %}
+
+  {% endif %}
 {% endblock %}

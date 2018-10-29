@@ -7,7 +7,6 @@ body {
 }
 /* navbar */
 #navbar{
-  min-height: 90px;
   /* background-color: #c8a202; */
   /* border: 1px solid red; */
    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.4) inset;;

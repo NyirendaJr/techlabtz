@@ -1,9 +1,28 @@
 {% extends 'blog/base.html' %}
+{% load staticfiles %}
+{% load widget_tweaks %}
 {% block content %}
-    <h1>New post</h1>
-    <form method="POST" class="post-form">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
-    </form>
+<div class="col-md-9" style="background-color: #fff;">
+  <div class="panel panel-info" style="border-color: #fff;">
+    <div class="panel-heading">
+      <h4>New post</h4>
+    </div>
+    <div class="panel-body">
+      <form method="POST" class="post-form">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="title">Title</label>
+            {% render_field form.title class="form-control"%}
+          </div>
+          <div class="form-group">
+            <label for="title">body</label>
+            {% render_field form.text class="form-control"%}
+          </div>
+          <div class="form-group">
+            <button type="submit" class="save btn btn-success">Save</button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock %}
